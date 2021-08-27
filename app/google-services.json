@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "208675460578",
+    "project_id": "intercorp-b2fdc",
+    "storage_bucket": "intercorp-b2fdc.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:208675460578:android:ad94c4e9265f46041a55bb",
+        "android_client_info": {
+          "package_name": "com.ppoza.intercorp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "208675460578-6npfki42ohhpvjncikdttvhupueb11af.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCfjmMyyogY-ElqJcbx1s-iJhSwQiW-Iqs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "208675460578-6npfki42ohhpvjncikdttvhupueb11af.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
