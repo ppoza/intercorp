@@ -1,13 +1,13 @@
-package com.ppoza.intercorp.ui.model;
+package com.ppoza.intercorp.model;
 
 import android.content.Intent;
 
-public class ActivityResult {
+public class ActivityRequestResult {
     private int requestCode;
     private int resultCode;
     private Intent data;
 
-    public ActivityResult(int requestCode, int resultCode, Intent data) {
+    public ActivityRequestResult(int requestCode, int resultCode, Intent data) {
         this.requestCode = requestCode;
         this.resultCode = resultCode;
         this.data = data;

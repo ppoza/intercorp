@@ -6,15 +6,16 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-import com.ppoza.intercorp.ui.model.ActivityResult;
+import com.ppoza.intercorp.model.ActivityRequestResult;
+
 
 public class MainViewModel extends ViewModel {
 
-    private MutableLiveData<ActivityResult> mActivityResultLiveData = new MutableLiveData();
-    public final LiveData<ActivityResult> activityResultLiveData = mActivityResultLiveData;
+    private MutableLiveData<ActivityRequestResult> mActivityResultLiveData = new MutableLiveData();
+    public final LiveData<ActivityRequestResult> activityResultLiveData = mActivityResultLiveData;
 
     void setActivityResult(int requestCode, int resultCode, Intent data) {
-        mActivityResultLiveData.postValue(new ActivityResult(requestCode, resultCode, data));
+        mActivityResultLiveData.postValue(new ActivityRequestResult(requestCode, resultCode, data));
     }
 
 }

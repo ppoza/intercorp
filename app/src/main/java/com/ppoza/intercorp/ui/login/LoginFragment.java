@@ -5,26 +5,24 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.fragment.NavHostFragment;
 
-import com.facebook.CallbackManager;
+import com.ppoza.intercorp.R;
 import com.ppoza.intercorp.databinding.LoginFragmentBinding;
+import com.ppoza.intercorp.ui.BaseFragment;
 import com.ppoza.intercorp.ui.MainViewModel;
+import com.ppoza.intercorp.ui.profile.ProfileFragment;
 
-public class LoginFragment extends Fragment {
+public class LoginFragment extends BaseFragment {
 
     private LoginViewModel mLoginViewModel;
-    private CallbackManager mCallbackManager;
-    private LoginFragmentBinding mBinding;
     private MainViewModel mMainViewModel;
-
-    public static LoginFragment newInstance() {
-        return new LoginFragment();
-    }
+    private LoginFragmentBinding mBinding;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
@@ -37,8 +35,6 @@ public class LoginFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        
-
         mLoginViewModel = new ViewModelProvider(this).get(LoginViewModel.class);
         mMainViewModel = new ViewModelProvider(requireActivity()).get(MainViewModel.class);
 
@@ -46,6 +42,12 @@ public class LoginFragment extends Fragment {
 
         mBinding.loginButton.setPermissions(mLoginViewModel.permissions);
         mBinding.loginButton.registerCallback(mLoginViewModel.callbackManager, mLoginViewModel.facebookCallback);
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        hideToolbar();
     }
 
     private void listenData() {
@@ -56,7 +58,20 @@ public class LoginFragment extends Fragment {
         });
 
         mLoginViewModel.loginResultLiveData.observe(getViewLifecycleOwner(), loginResult -> {
-            Log.i("", "");
+            switch (loginResult.getResponseType()) {
+                case LOADING: {
+                    break;
+                }
+                case SUCCESS: {
+                    NavHostFragment.findNavController(LoginFragment.this)
+                            .navigate(R.id.action_login_to_user_profile);
+                    break;
+                }
+                case ERROR: {
+                    Toast.makeText(requireActivity(), loginResult.getMessage(), Toast.LENGTH_LONG);
+                    break;
+                }
+            }
         });
     }
 
