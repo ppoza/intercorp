@@ -14,6 +14,7 @@ import androidx.navigation.fragment.NavHostFragment;
 import com.ppoza.intercorp.R;
 import com.ppoza.intercorp.databinding.FragmentProfileBinding;
 import com.ppoza.intercorp.ui.login.LoginViewModel;
+import com.ppoza.intercorp.utils.IntercorpViewModelFactory;
 
 public class ProfileFragment extends Fragment {
 
@@ -30,7 +31,7 @@ public class ProfileFragment extends Fragment {
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        mProfileViewModel = new ViewModelProvider(this).get(ProfileViewModel.class);
+        mProfileViewModel = new ViewModelProvider(this, IntercorpViewModelFactory.getInstance()).get(ProfileViewModel.class);
 
         view.findViewById(R.id.button_second).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -40,4 +41,6 @@ public class ProfileFragment extends Fragment {
             }
         });
     }
+
+
 }
