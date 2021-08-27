@@ -9,7 +9,9 @@ import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
 import com.facebook.login.LoginResult;
 import com.ppoza.intercorp.R;
+import com.ppoza.intercorp.interactors.LoginCaseUse;
 import com.ppoza.intercorp.model.DataResponse;
+import com.ppoza.intercorp.utils.CallbackDataResponse;
 
 import java.util.List;
 
@@ -20,7 +22,19 @@ public class LoginViewModel extends ViewModel {
     public FacebookCallback<LoginResult> facebookCallback = new FacebookCallback<LoginResult>() {
         @Override
         public void onSuccess(LoginResult loginResult) {
-            mLoginResultLiveData.postValue(DataResponse.success(loginResult, R.string.success));
+
+            mLoginResultLiveData.postValue(DataResponse.loading(null, R.string.loading));
+            loginCaseUse.execute(loginResult.getAccessToken(), new CallbackDataResponse() {
+                @Override
+                public void onSuccess() {
+                    mLoginResultLiveData.postValue(DataResponse.success(null, R.string.success));
+                }
+
+                @Override
+                public void onError() {
+                    mLoginResultLiveData.postValue(DataResponse.error(null, R.string.login_cancel_by_user));
+                }
+            });
         }
 
         @Override
@@ -37,4 +51,10 @@ public class LoginViewModel extends ViewModel {
     private MutableLiveData<DataResponse> mLoginResultLiveData = new MutableLiveData();
     public final LiveData<DataResponse> loginResultLiveData = mLoginResultLiveData;
 
+
+    private LoginCaseUse loginCaseUse;
+
+    public LoginViewModel(LoginCaseUse loginCaseUse) {
+        this.loginCaseUse = loginCaseUse;
+    }
 }

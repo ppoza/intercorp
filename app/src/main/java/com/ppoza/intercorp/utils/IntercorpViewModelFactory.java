@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.ppoza.intercorp.interactors.Interactors;
+import com.ppoza.intercorp.ui.login.LoginViewModel;
 import com.ppoza.intercorp.ui.profile.ProfileViewModel;
 
 public class IntercorpViewModelFactory implements ViewModelProvider.Factory {
@@ -22,7 +23,7 @@ public class IntercorpViewModelFactory implements ViewModelProvider.Factory {
 
     private IntercorpViewModelFactory() {}
 
-    void inject(Interactors interactors) {
+    public void inject(Interactors interactors) {
         this.interactors = interactors;
     }
 
@@ -31,7 +32,9 @@ public class IntercorpViewModelFactory implements ViewModelProvider.Factory {
     @Override
     public <T extends ViewModel> T create(@NonNull Class<T> modelClass) {
         if(modelClass == ProfileViewModel.class) {
-            return (T) new ProfileViewModel(interactors);
+            return (T) new ProfileViewModel(interactors.getLogoutUseCase());
+        } else if(modelClass == LoginViewModel.class) {
+            return (T) new LoginViewModel(interactors.getLoginCaseUse());
         }
         return null;
     }

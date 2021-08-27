@@ -1,7 +1,6 @@
 package com.ppoza.intercorp.ui.login;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,7 +15,7 @@ import com.ppoza.intercorp.R;
 import com.ppoza.intercorp.databinding.LoginFragmentBinding;
 import com.ppoza.intercorp.ui.BaseFragment;
 import com.ppoza.intercorp.ui.MainViewModel;
-import com.ppoza.intercorp.ui.profile.ProfileFragment;
+import com.ppoza.intercorp.utils.IntercorpViewModelFactory;
 
 public class LoginFragment extends BaseFragment {
 
@@ -35,7 +34,7 @@ public class LoginFragment extends BaseFragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        mLoginViewModel = new ViewModelProvider(this).get(LoginViewModel.class);
+        mLoginViewModel = new ViewModelProvider(this, IntercorpViewModelFactory.getInstance()).get(LoginViewModel.class);
         mMainViewModel = new ViewModelProvider(requireActivity()).get(MainViewModel.class);
 
         listenData();
