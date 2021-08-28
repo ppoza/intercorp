@@ -3,9 +3,9 @@ package com.ppoza.intercorp.model;
 import android.content.Intent;
 
 public class ActivityRequestResult {
-    private int requestCode;
-    private int resultCode;
-    private Intent data;
+    private final int requestCode;
+    private final int resultCode;
+    private final Intent data;
 
     public ActivityRequestResult(int requestCode, int resultCode, Intent data) {
         this.requestCode = requestCode;

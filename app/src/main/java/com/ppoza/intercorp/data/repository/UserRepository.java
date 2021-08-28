@@ -6,7 +6,7 @@ import com.ppoza.intercorp.utils.DataResponseCallback;
 
 public class UserRepository {
 
-    private UserDataSource dataSource;
+    private final UserDataSource dataSource;
 
     public UserRepository(UserDataSource dataSource) {
         this.dataSource = dataSource;

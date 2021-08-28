@@ -41,7 +41,7 @@ public class ProfileFragment extends Fragment {
         listenData();
         requestData();
 
-        mBinding.logoutButtoon.setOnClickListener( button -> {
+        mBinding.logoutButton.setOnClickListener( button -> {
                 mProfileViewModel.logout();
                 NavHostFragment.findNavController(ProfileFragment.this)
                         .navigate(R.id.action_profile_to_login);
@@ -57,7 +57,7 @@ public class ProfileFragment extends Fragment {
 
     private void listenData() {
         mProfileViewModel.userLiveData.observe(getViewLifecycleOwner(),  dataResponse -> {
-
+            mBinding.setDataResponse(dataResponse);
         });
     }
 

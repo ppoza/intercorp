@@ -6,7 +6,7 @@ import com.ppoza.intercorp.utils.DataResponseCallback;
 
 public class GetUserUseCase {
 
-    private UserRepository mUserRepository;
+    private final UserRepository mUserRepository;
 
     public GetUserUseCase(UserRepository userRepository) {
         this.mUserRepository = userRepository;

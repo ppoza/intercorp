@@ -9,7 +9,7 @@ import com.ppoza.intercorp.utils.DataResponseCallback;
 
 public class LoginUseCase {
 
-    private FirebaseAuth mFirebaseAuth;
+    private final FirebaseAuth mFirebaseAuth;
 
     public LoginUseCase(FirebaseAuth firebaseAuth) {
         this.mFirebaseAuth = firebaseAuth;

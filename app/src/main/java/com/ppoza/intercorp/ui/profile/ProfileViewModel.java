@@ -12,7 +12,7 @@ import com.ppoza.intercorp.utils.DataResponseCallback;
 
 public class ProfileViewModel extends ViewModel {
 
-    private Interactors mInteractors;
+    private final Interactors mInteractors;
 
     private MutableLiveData<DataResponse<User>> mUserLiveData = new MutableLiveData();
     public final LiveData<DataResponse<User>> userLiveData = mUserLiveData;

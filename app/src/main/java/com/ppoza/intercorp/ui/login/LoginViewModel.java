@@ -22,10 +22,10 @@ public class LoginViewModel extends ViewModel {
     public final List<String> permissions = List.of("email", "public_profile");
     public FacebookCallback<LoginResult> facebookCallback = new FacebookCallbackImpl();
 
-    private MutableLiveData<DataResponse> mLoginResultLiveData = new MutableLiveData();
+    private final MutableLiveData<DataResponse> mLoginResultLiveData = new MutableLiveData();
     public final LiveData<DataResponse> loginResultLiveData = mLoginResultLiveData;
 
-    private Interactors mInteractors;
+    private final Interactors mInteractors;
 
     public LoginViewModel(Interactors interactors) {
         this.mInteractors = interactors;

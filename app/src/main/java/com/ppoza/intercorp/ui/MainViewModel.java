@@ -11,7 +11,7 @@ import com.ppoza.intercorp.model.ActivityRequestResult;
 
 public class MainViewModel extends ViewModel {
 
-    private MutableLiveData<ActivityRequestResult> mActivityResultLiveData = new MutableLiveData();
+    private final MutableLiveData<ActivityRequestResult> mActivityResultLiveData = new MutableLiveData();
     public final LiveData<ActivityRequestResult> activityResultLiveData = mActivityResultLiveData;
 
     void setActivityResult(int requestCode, int resultCode, Intent data) {
