@@ -45,4 +45,8 @@ public class DataResponse<T> {
     public T getData() {
         return data;
     }
+
+    public boolean isLoading() {
+        return responseType == ResponseType.LOADING;
+    }
 }

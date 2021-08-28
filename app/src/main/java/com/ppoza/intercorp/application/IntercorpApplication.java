@@ -2,6 +2,7 @@ package com.ppoza.intercorp.application;
 
 import androidx.multidex.MultiDexApplication;
 
+import com.facebook.login.LoginManager;
 import com.google.firebase.auth.FirebaseAuth;
 import com.ppoza.intercorp.data.datasource.UserFirebaseDataSource;
 import com.ppoza.intercorp.data.repository.UserRepository;
@@ -27,7 +28,7 @@ public class IntercorpApplication extends MultiDexApplication {
 
         Interactors interactors = new Interactors(
                 new LoginUseCase(firebaseAuth),
-                new LogoutUseCase(firebaseAuth),
+                new LogoutUseCase(firebaseAuth, LoginManager.getInstance()),
                 new IsLoggedUseCase(userRepository),
                 new GetUserUseCase(userRepository)
         );

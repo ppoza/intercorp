@@ -17,6 +17,9 @@ public class ProfileViewModel extends ViewModel {
     private MutableLiveData<DataResponse<User>> mUserLiveData = new MutableLiveData();
     public final LiveData<DataResponse<User>> userLiveData = mUserLiveData;
 
+    private MutableLiveData<DataResponse> mLogoutResponseLiveData = new MutableLiveData();
+    public final LiveData<DataResponse> logoutResponseLiveData = mLogoutResponseLiveData;
+
     public ProfileViewModel(Interactors interactors) {
         this.mInteractors = interactors;
     }
@@ -26,7 +29,18 @@ public class ProfileViewModel extends ViewModel {
     }
 
     public void logout() {
-        mInteractors.getLogoutUseCase().execute();
+        mLogoutResponseLiveData.postValue(DataResponse.loading());
+        mInteractors.getLogoutUseCase().execute(new DataResponseCallback<User>() {
+            @Override
+            public void onSuccess(User user) {
+                mLogoutResponseLiveData.postValue(DataResponse.success(null));
+            }
+
+            @Override
+            public void onError() {
+                mLogoutResponseLiveData.postValue(DataResponse.error(R.string.error_logout));
+            }
+        });
     }
 
     public void requestUser() {

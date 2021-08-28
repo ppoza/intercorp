@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -15,9 +16,11 @@ import androidx.navigation.fragment.NavHostFragment;
 
 import com.ppoza.intercorp.R;
 import com.ppoza.intercorp.databinding.FragmentProfileBinding;
+import com.ppoza.intercorp.ui.BaseFragment;
+import com.ppoza.intercorp.ui.login.LoginFragment;
 import com.ppoza.intercorp.utils.IntercorpViewModelFactory;
 
-public class ProfileFragment extends Fragment {
+public class ProfileFragment extends BaseFragment {
 
     private FragmentProfileBinding mBinding;
     private ProfileViewModel mProfileViewModel;
@@ -43,10 +46,14 @@ public class ProfileFragment extends Fragment {
 
         mBinding.logoutButton.setOnClickListener( button -> {
                 mProfileViewModel.logout();
-                NavHostFragment.findNavController(ProfileFragment.this)
-                        .navigate(R.id.action_profile_to_login);
             }
         );
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        showToolbar();
     }
 
     private void checkLogged() {
@@ -57,7 +64,22 @@ public class ProfileFragment extends Fragment {
 
     private void listenData() {
         mProfileViewModel.userLiveData.observe(getViewLifecycleOwner(),  dataResponse -> {
-            mBinding.setDataResponse(dataResponse);
+            mBinding.setUserDataResponse(dataResponse);
+        });
+
+        mProfileViewModel.logoutResponseLiveData.observe(getViewLifecycleOwner(),  dataResponse -> {
+            mBinding.setLogoutDataResponse(dataResponse);
+            switch (dataResponse.getResponseType()) {
+                case SUCCESS: {
+                    NavHostFragment.findNavController(ProfileFragment.this)
+                            .navigate(R.id.action_profile_to_login);
+                    break;
+                }
+                case ERROR: {
+                    Toast.makeText(requireActivity(), dataResponse.getMessage(), Toast.LENGTH_LONG);
+                    break;
+                }
+            }
         });
     }
 
