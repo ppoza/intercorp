@@ -23,7 +23,7 @@ public class ProfileViewModel extends ViewModel {
     private MutableLiveData<DataResponse> mLogoutResponseLiveData = new MutableLiveData();
     public final LiveData<DataResponse> logoutResponseLiveData = mLogoutResponseLiveData;
 
-    public User userToCreate = new User();
+    public User user = new User();
 
     public ProfileViewModel(Interactors interactors) {
         this.mInteractors = interactors;
@@ -41,7 +41,8 @@ public class ProfileViewModel extends ViewModel {
                 if(user == null) {
                     mUserLiveData.postValue(DataResponse.notFound());
                 } else {
-                    mUserLiveData.postValue(DataResponse.success(user));
+                    ProfileViewModel.this.user = user;
+                    mUserLiveData.postValue(DataResponse.success());
                 }
             }
 
@@ -54,10 +55,11 @@ public class ProfileViewModel extends ViewModel {
 
     public void createUser() {
         mUserLiveData.postValue(DataResponse.loading());
-        mInteractors.getCreateUserUseCase().execute(userToCreate, new DataResponseCallback<User>() {
+        mInteractors.getCreateUserUseCase().execute(user, new DataResponseCallback<User>() {
             @Override
             public void onSuccess(User user) {
-                mUserLiveData.postValue(DataResponse.success(user));
+                mUserLiveData.postValue(DataResponse.success());
+                mUserLiveData.postValue(DataResponse.success(R.string.user_created));
             }
 
             @Override

@@ -24,7 +24,6 @@ public class UserFirebaseDataSource implements UserDataSource {
     @Override
     public void getUser(DataResponseCallback<User> callback) {
         FirebaseUser firebaseUser =  mFirebaseAuth.getCurrentUser();
-
         this.mUsersReferences.child(firebaseUser.getUid()).get().addOnCompleteListener(task -> {
             if (task.isSuccessful()) {
                 User user = task.getResult().getValue(User.class);
@@ -42,12 +41,8 @@ public class UserFirebaseDataSource implements UserDataSource {
     @Override
     public void createUser(User user, DataResponseCallback<User> callback) {
         FirebaseUser firebaseUser =  mFirebaseAuth.getCurrentUser();
-        this.mUsersReferences.child(firebaseUser.getUid()).setValue(user).addOnCompleteListener(task -> {
-            if (task.isSuccessful()) {
-                callback.onSuccess(null);
-            }  else {
-                callback.onError();
-            }
-        });
+        this.mUsersReferences.child(firebaseUser.getUid()).setValue(user)
+                .addOnSuccessListener(aVoid -> callback.onSuccess(null))
+                .addOnFailureListener(e -> callback.onError());
     }
 }

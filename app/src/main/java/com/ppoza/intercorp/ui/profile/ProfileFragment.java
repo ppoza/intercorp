@@ -47,17 +47,17 @@ public class ProfileFragment extends BaseFragment {
         setUI();
     }
 
+    @Override
+    public void onStart() {
+        super.onStart();
+        showToolbar();
+    }
+
     private void setUI() {
         mBinding.logoutButton.setOnClickListener( button -> {
                 mProfileViewModel.createUser();
             }
         );
-    }
-
-    @Override
-    public void onStart() {
-        super.onStart();
-        showToolbar();
     }
 
     private void checkLogged() {
@@ -70,22 +70,26 @@ public class ProfileFragment extends BaseFragment {
 
         mProfileViewModel.createUserResponseLiveData.observe(getViewLifecycleOwner(),  dataResponse -> {
             mBinding.setUserDataResponse(dataResponse);
+            switch (dataResponse.getResponseType()) {
+                case SUCCESS:
+                case ERROR: {
+                    Toast.makeText(requireActivity(), dataResponse.getMessage(), Toast.LENGTH_LONG).show();
+                    break;
+                }
+            }
         });
 
 
         mProfileViewModel.userLiveData.observe(getViewLifecycleOwner(),  dataResponse -> {
             mBinding.setUserDataResponse(dataResponse);
             switch (dataResponse.getResponseType()) {
-                case SUCCESS: {
-                    mBinding.setUser(dataResponse.getData());
-                    break;
-                }
+                case SUCCESS:
                 case NOT_FOUND: {
-                    mBinding.setUser(mProfileViewModel.userToCreate);
+                    mBinding.setUser(mProfileViewModel.user);
                     break;
                 }
                 case ERROR: {
-                    Toast.makeText(requireActivity(), dataResponse.getMessage(), Toast.LENGTH_LONG);
+                    Toast.makeText(requireActivity(), dataResponse.getMessage(), Toast.LENGTH_LONG).show();
                     break;
                 }
             }
@@ -100,7 +104,7 @@ public class ProfileFragment extends BaseFragment {
                     break;
                 }
                 case ERROR: {
-                    Toast.makeText(requireActivity(), dataResponse.getMessage(), Toast.LENGTH_LONG);
+                    Toast.makeText(requireActivity(), dataResponse.getMessage(), Toast.LENGTH_LONG).show();
                     break;
                 }
             }

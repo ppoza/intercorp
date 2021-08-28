@@ -25,6 +25,7 @@
     <string name="hint_last_name">Apellido</string>
     <string name="hint_age">Edad</string>
     <string name="hint_birth_date">Fecha de nacimiento</string>
+    <string name="user_created">Su cuenta se ha creado correctamente.</string>
 
 
 </resources>

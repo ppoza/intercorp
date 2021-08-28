@@ -12,8 +12,16 @@ public class DataResponse<T> {
         return new DataResponse(ResponseType.SUCCESS, data, message);
     }
 
+    public static <T> DataResponse success() {
+        return new DataResponse(ResponseType.SUCCESS, null, R.string.success);
+    }
+
     public static <T> DataResponse success(T data) {
         return new DataResponse(ResponseType.SUCCESS, data, R.string.success);
+    }
+
+    public static <T> DataResponse success(int message) {
+        return new DataResponse(ResponseType.SUCCESS, null, R.string.success);
     }
 
     public static <T> DataResponse error(int message) {
