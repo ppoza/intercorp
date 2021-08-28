@@ -26,6 +26,7 @@
     <string name="hint_age">Edad</string>
     <string name="hint_birth_date">Fecha de nacimiento</string>
     <string name="user_created">Su cuenta se ha creado correctamente.</string>
+    <string name="fill_all_fields">Ingrese datos válidos en todos los campos.</string>
 
 
 </resources>

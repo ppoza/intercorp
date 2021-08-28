@@ -21,7 +21,7 @@ public class DataResponse<T> {
     }
 
     public static <T> DataResponse success(int message) {
-        return new DataResponse(ResponseType.SUCCESS, null, R.string.success);
+        return new DataResponse(ResponseType.SUCCESS, null, message);
     }
 
     public static <T> DataResponse error(int message) {
@@ -56,6 +56,11 @@ public class DataResponse<T> {
 
     public T getData() {
         return data;
+    }
+
+
+    public boolean isSuccess() {
+        return responseType == ResponseType.SUCCESS;
     }
 
     public boolean isLoading() {

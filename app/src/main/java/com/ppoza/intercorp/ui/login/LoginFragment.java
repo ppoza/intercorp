@@ -14,7 +14,7 @@ import androidx.navigation.fragment.NavHostFragment;
 import com.ppoza.intercorp.R;
 import com.ppoza.intercorp.databinding.FragmentLoginBinding;
 import com.ppoza.intercorp.ui.BaseFragment;
-import com.ppoza.intercorp.ui.MainViewModel;
+import com.ppoza.intercorp.ui.main.MainViewModel;
 import com.ppoza.intercorp.utils.IntercorpViewModelFactory;
 
 public class LoginFragment extends BaseFragment {

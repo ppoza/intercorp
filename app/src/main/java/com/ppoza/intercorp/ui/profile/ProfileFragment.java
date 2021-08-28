@@ -1,5 +1,6 @@
 package com.ppoza.intercorp.ui.profile;
 
+import android.app.DatePickerDialog;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,17 +9,20 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.fragment.NavHostFragment;
 
 import com.ppoza.intercorp.R;
+import com.ppoza.intercorp.config.Constants;
 import com.ppoza.intercorp.databinding.FragmentProfileBinding;
 import com.ppoza.intercorp.ui.BaseFragment;
-import com.ppoza.intercorp.ui.login.LoginFragment;
 import com.ppoza.intercorp.utils.IntercorpViewModelFactory;
+
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Locale;
 
 public class ProfileFragment extends BaseFragment {
 
@@ -58,6 +62,23 @@ public class ProfileFragment extends BaseFragment {
                 mProfileViewModel.createUser();
             }
         );
+
+        final Calendar calendar = Calendar.getInstance();
+        final SimpleDateFormat simpleDateFormat = new SimpleDateFormat(Constants.DATE_FORMAT, Locale.getDefault());
+        DatePickerDialog.OnDateSetListener dateListener = (view, year, monthOfYear, dayOfMonth) -> {
+            calendar.set(Calendar.YEAR, year);
+            calendar.set(Calendar.MONTH, monthOfYear);
+            calendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+            mBinding.birthDataEditText.setText(simpleDateFormat.format(calendar.getTime()));
+        };
+
+        mBinding.birthDataEditText.setOnClickListener(v -> {
+            DatePickerDialog pickerDialog = new DatePickerDialog(requireContext(), dateListener, calendar
+                    .get(Calendar.YEAR), calendar.get(Calendar.MONTH),
+                    calendar.get(Calendar.DAY_OF_MONTH));
+            pickerDialog.getDatePicker().setMaxDate(calendar.getTime().getTime());
+            pickerDialog.show();
+        });
     }
 
     private void checkLogged() {

@@ -54,19 +54,30 @@ public class ProfileViewModel extends ViewModel {
     }
 
     public void createUser() {
+        if(userIsInvalid()){
+            mCreateUserResponseLiveData.postValue(DataResponse.error(R.string.fill_all_fields));
+            return;
+        }
         mUserLiveData.postValue(DataResponse.loading());
         mInteractors.getCreateUserUseCase().execute(user, new DataResponseCallback<User>() {
             @Override
             public void onSuccess(User user) {
                 mUserLiveData.postValue(DataResponse.success());
-                mUserLiveData.postValue(DataResponse.success(R.string.user_created));
+                mCreateUserResponseLiveData.postValue(DataResponse.success(R.string.user_created));
             }
 
             @Override
             public void onError() {
-                mUserLiveData.postValue(DataResponse.error(R.string.error_login));
+                mCreateUserResponseLiveData.postValue(DataResponse.error(R.string.error_login));
             }
         });
+    }
+
+    private boolean userIsInvalid() {
+        return user.age == 0 ||
+                user.lastName == null || user.lastName.isEmpty() ||
+                user.name == null || user.name.isEmpty() ||
+                user.birthDate == 0;
     }
 
     public void logout() {

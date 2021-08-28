@@ -1,4 +1,4 @@
-package com.ppoza.intercorp.ui;
+package com.ppoza.intercorp.ui.main;
 
 import android.content.Intent;
 
