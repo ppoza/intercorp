@@ -20,4 +20,8 @@ public class UserRepository {
         dataSource.getUser(dataResponseCallback);
     }
 
+    public void createUser(User user, DataResponseCallback<User> dataResponseCallback) {
+        dataSource.createUser(user, dataResponseCallback);
+    }
+
 }

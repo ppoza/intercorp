@@ -8,15 +8,22 @@
         <import type="android.view.View"/>
         <import type="com.ppoza.intercorp.model.DataResponse"/>
         <import type="com.ppoza.intercorp.model.User"/>
+
+        <variable
+            name="user"
+            type="User" />
         <variable
             name="userDataResponse"
-            type="DataResponse&lt;User>" />
+            type="DataResponse" />
+        <variable
+            name="createUserDataResponse"
+            type="DataResponse" />
         <variable
             name="logoutDataResponse"
             type="DataResponse" />
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <RelativeLayout
         android:id="@+id/root"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -26,15 +33,73 @@
             android:id="@+id/container"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:visibility="@{!userDataResponse.isLoading() &amp;&amp; !logoutDataResponse.isLoading() ? View.VISIBLE : View.GONE}">
+            android:padding="16dp"
+            android:visibility="@{!userDataResponse.isLoading() &amp;&amp; !logoutDataResponse.isLoading() ? View.VISIBLE : View.GONE}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
             <TextView
+                android:id="@+id/welcome"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="@string/welcome"
+                android:textSize="32dp"
+                android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                android:text="@{userDataResponse.data.displayName}"/>
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <EditText
+                android:id="@+id/name_edit_text"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="64dp"
+                android:hint="@string/hint_name"
+                android:inputType="textPersonName"
+                android:text="@={user.name}"
+                android:enabled="@{userDataResponse.isNotFound()}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/welcome" />
+
+            <EditText
+                android:id="@+id/last_name_edit_text"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:hint="@string/hint_last_name"
+                android:inputType="textPersonName"
+                android:text="@={user.lastName}"
+                android:enabled="@{userDataResponse.isNotFound()}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.937"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/name_edit_text" />
+
+            <EditText
+                android:id="@+id/age_edit_text"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:hint="@string/hint_age"
+                android:inputType="number"
+                android:enabled="@{userDataResponse.isNotFound()}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/last_name_edit_text" />
+
+            <EditText
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:hint="@string/hint_birth_date"
+                android:inputType="date"
+                android:enabled="@{userDataResponse.isNotFound()}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/age_edit_text" />
 
 
             <Button
@@ -42,21 +107,22 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="16dp"
-                android:text="@string/logout"
+                android:text="@string/create_client"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"/>
+                app:layout_constraintStart_toStartOf="parent"
+                android:visibility="@{ userDataResponse.isNotFound() ? View.VISIBLE : View.GONE}"
+                />
+
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <ProgressBar
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            android:visibility="@{userDataResponse.isLoading() || logoutDataResponse.isLoading() ? View.VISIBLE : View.GONE}"/>
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            android:layout_centerInParent="true"
+            android:visibility="@{userDataResponse.isLoading() || logoutDataResponse.isLoading() ? View.VISIBLE : View.GONE}"
+            tools:visibility="gone"/>
+    </RelativeLayout>
 
 </layout>

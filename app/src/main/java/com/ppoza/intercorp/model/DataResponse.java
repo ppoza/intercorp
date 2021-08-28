@@ -28,6 +28,10 @@ public class DataResponse<T> {
         return new DataResponse(ResponseType.LOADING, null, R.string.loading);
     }
 
+    public static <T> DataResponse notFound() {
+        return new DataResponse(ResponseType.NOT_FOUND, null, R.string.loading);
+    }
+
     private DataResponse(ResponseType responseType, T data, int message) {
         this.responseType = responseType;
         this.data = data;
@@ -48,5 +52,9 @@ public class DataResponse<T> {
 
     public boolean isLoading() {
         return responseType == ResponseType.LOADING;
+    }
+
+    public boolean isNotFound() {
+        return responseType == ResponseType.NOT_FOUND;
     }
 }

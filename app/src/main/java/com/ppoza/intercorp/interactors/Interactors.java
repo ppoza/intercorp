@@ -6,17 +6,20 @@ public class Interactors {
     private final LogoutUseCase mLogoutUseCase;
     private final LoginUseCase mLoginCaseUse;
     private final IsLoggedUseCase mIsLoggedUseCase;
+    private final CreateUserUseCase mCreateUserUseCase;
 
     public Interactors(
             LoginUseCase loginCaseUse,
             LogoutUseCase logoutUseCase,
             IsLoggedUseCase isLoggedUseCase,
-            GetUserUseCase getUserUseCase
+            GetUserUseCase getUserUseCase,
+            CreateUserUseCase createUserUseCase
     ) {
         this.mLogoutUseCase = logoutUseCase;
         this.mLoginCaseUse = loginCaseUse;
         this.mIsLoggedUseCase = isLoggedUseCase;
         this.mGetUserUseCase = getUserUseCase;
+        this.mCreateUserUseCase = createUserUseCase;
     }
 
     public LogoutUseCase getLogoutUseCase() {
@@ -33,5 +36,9 @@ public class Interactors {
 
     public GetUserUseCase getGetUserUseCase() {
         return mGetUserUseCase;
+    }
+
+    public CreateUserUseCase getCreateUserUseCase() {
+        return mCreateUserUseCase;
     }
 }

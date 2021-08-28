@@ -4,5 +4,6 @@ package com.ppoza.intercorp.model;
 public enum ResponseType {
     LOADING,
     SUCCESS,
+    NOT_FOUND,
     ERROR;
 }

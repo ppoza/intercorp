@@ -17,8 +17,13 @@ public class ProfileViewModel extends ViewModel {
     private MutableLiveData<DataResponse<User>> mUserLiveData = new MutableLiveData();
     public final LiveData<DataResponse<User>> userLiveData = mUserLiveData;
 
+    private MutableLiveData<DataResponse> mCreateUserResponseLiveData = new MutableLiveData();
+    public final LiveData<DataResponse> createUserResponseLiveData = mCreateUserResponseLiveData;
+
     private MutableLiveData<DataResponse> mLogoutResponseLiveData = new MutableLiveData();
     public final LiveData<DataResponse> logoutResponseLiveData = mLogoutResponseLiveData;
+
+    public User userToCreate = new User();
 
     public ProfileViewModel(Interactors interactors) {
         this.mInteractors = interactors;
@@ -26,6 +31,40 @@ public class ProfileViewModel extends ViewModel {
 
     public boolean isLogged() {
         return mInteractors.getIsLoggedUseCase().execute();
+    }
+
+    public void requestUser() {
+        mUserLiveData.postValue(DataResponse.loading());
+        mInteractors.getGetUserUseCase().execute(new DataResponseCallback<User>() {
+            @Override
+            public void onSuccess(User user) {
+                if(user == null) {
+                    mUserLiveData.postValue(DataResponse.notFound());
+                } else {
+                    mUserLiveData.postValue(DataResponse.success(user));
+                }
+            }
+
+            @Override
+            public void onError() {
+                mUserLiveData.postValue(DataResponse.error(R.string.error_login));
+            }
+        });
+    }
+
+    public void createUser() {
+        mUserLiveData.postValue(DataResponse.loading());
+        mInteractors.getCreateUserUseCase().execute(userToCreate, new DataResponseCallback<User>() {
+            @Override
+            public void onSuccess(User user) {
+                mUserLiveData.postValue(DataResponse.success(user));
+            }
+
+            @Override
+            public void onError() {
+                mUserLiveData.postValue(DataResponse.error(R.string.error_login));
+            }
+        });
     }
 
     public void logout() {
@@ -42,20 +81,4 @@ public class ProfileViewModel extends ViewModel {
             }
         });
     }
-
-    public void requestUser() {
-        mUserLiveData.postValue(DataResponse.loading());
-        mInteractors.getGetUserUseCase().execute(new DataResponseCallback<User>() {
-            @Override
-            public void onSuccess(User user) {
-                mUserLiveData.postValue(DataResponse.success(user));
-            }
-
-            @Override
-            public void onError() {
-                mUserLiveData.postValue(DataResponse.error(R.string.error_login));
-            }
-        });
-    }
-
 }

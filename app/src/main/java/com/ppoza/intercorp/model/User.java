@@ -2,19 +2,18 @@ package com.ppoza.intercorp.model;
 
 public class User {
 
-    private String email;
-    private String displayName;
+    public String name;
+    public String lastName;
+    public int age;
+    public String birthDate;
 
-    public User(String email, String displayName) {
-        this.email = email;
-        this.displayName = displayName;
+    public User() {
     }
 
-    public String getEmail() {
-        return email;
-    }
-
-    public String getDisplayName() {
-        return displayName;
+    public User(String name, String lastName, int age, String birthDate) {
+        this.name = name;
+        this.lastName = lastName;
+        this.age = age;
+        this.birthDate = birthDate;
     }
 }

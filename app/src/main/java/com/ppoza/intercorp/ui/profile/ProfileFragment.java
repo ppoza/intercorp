@@ -40,12 +40,16 @@ public class ProfileFragment extends BaseFragment {
         mNavController = Navigation.findNavController(view);
         mProfileViewModel = new ViewModelProvider(this, IntercorpViewModelFactory.getInstance()).get(ProfileViewModel.class);
 
+
         checkLogged();
         listenData();
         requestData();
+        setUI();
+    }
 
+    private void setUI() {
         mBinding.logoutButton.setOnClickListener( button -> {
-                mProfileViewModel.logout();
+                mProfileViewModel.createUser();
             }
         );
     }
@@ -63,8 +67,28 @@ public class ProfileFragment extends BaseFragment {
     }
 
     private void listenData() {
+
+        mProfileViewModel.createUserResponseLiveData.observe(getViewLifecycleOwner(),  dataResponse -> {
+            mBinding.setUserDataResponse(dataResponse);
+        });
+
+
         mProfileViewModel.userLiveData.observe(getViewLifecycleOwner(),  dataResponse -> {
             mBinding.setUserDataResponse(dataResponse);
+            switch (dataResponse.getResponseType()) {
+                case SUCCESS: {
+                    mBinding.setUser(dataResponse.getData());
+                    break;
+                }
+                case NOT_FOUND: {
+                    mBinding.setUser(mProfileViewModel.userToCreate);
+                    break;
+                }
+                case ERROR: {
+                    Toast.makeText(requireActivity(), dataResponse.getMessage(), Toast.LENGTH_LONG);
+                    break;
+                }
+            }
         });
 
         mProfileViewModel.logoutResponseLiveData.observe(getViewLifecycleOwner(),  dataResponse -> {

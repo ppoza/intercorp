@@ -7,4 +7,5 @@ public interface UserDataSource {
 
     boolean isLogged();
     void getUser(DataResponseCallback<User> dataResponseCallback);
+    void createUser(User user, DataResponseCallback<User> dataResponseCallback);
 }
