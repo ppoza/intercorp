@@ -12,7 +12,7 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.fragment.NavHostFragment;
 
 import com.ppoza.intercorp.R;
-import com.ppoza.intercorp.databinding.LoginFragmentBinding;
+import com.ppoza.intercorp.databinding.FragmentLoginBinding;
 import com.ppoza.intercorp.ui.BaseFragment;
 import com.ppoza.intercorp.ui.MainViewModel;
 import com.ppoza.intercorp.utils.IntercorpViewModelFactory;
@@ -21,12 +21,12 @@ public class LoginFragment extends BaseFragment {
 
     private LoginViewModel mLoginViewModel;
     private MainViewModel mMainViewModel;
-    private LoginFragmentBinding mBinding;
+    private FragmentLoginBinding mBinding;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        mBinding = LoginFragmentBinding.inflate(inflater, container, false);
+        mBinding = FragmentLoginBinding.inflate(inflater, container, false);
         return mBinding.getRoot();
     }
 
@@ -57,6 +57,7 @@ public class LoginFragment extends BaseFragment {
         });
 
         mLoginViewModel.loginResultLiveData.observe(getViewLifecycleOwner(), loginResult -> {
+            mBinding.setIsLoading(loginResult.isLoading());
             switch (loginResult.getResponseType()) {
                 case LOADING: {
                     break;
