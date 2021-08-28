@@ -1,8 +1,8 @@
 package com.ppoza.intercorp.utils;
 
-public interface DataResponseCallback {
+public interface DataResponseCallback<T> {
 
-    void onSuccess();
+    void onSuccess(T data);
     void onError();
 
 }

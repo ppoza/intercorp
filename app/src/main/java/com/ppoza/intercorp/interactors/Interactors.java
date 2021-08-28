@@ -2,29 +2,36 @@ package com.ppoza.intercorp.interactors;
 
 public class Interactors {
 
-    private LogoutUseCase logoutUseCase;
-    private LoginUseCase loginCaseUse;
-    private IsLoggeedUseCase isLoggeedUseCase;
+    private final GetUserUseCase mGetUserUseCase;
+    private final LogoutUseCase mLogoutUseCase;
+    private final LoginUseCase mLoginCaseUse;
+    private final IsLoggedUseCase mIsLoggedUseCase;
 
     public Interactors(
             LoginUseCase loginCaseUse,
             LogoutUseCase logoutUseCase,
-            IsLoggeedUseCase isLoggeedUseCase
+            IsLoggedUseCase isLoggedUseCase,
+            GetUserUseCase getUserUseCase
     ) {
-        this.logoutUseCase = logoutUseCase;
-        this.loginCaseUse = loginCaseUse;
-        this.isLoggeedUseCase = isLoggeedUseCase;
+        this.mLogoutUseCase = logoutUseCase;
+        this.mLoginCaseUse = loginCaseUse;
+        this.mIsLoggedUseCase = isLoggedUseCase;
+        this.mGetUserUseCase = getUserUseCase;
     }
 
     public LogoutUseCase getLogoutUseCase() {
-        return logoutUseCase;
+        return mLogoutUseCase;
     }
 
     public LoginUseCase getLoginCaseUse() {
-        return loginCaseUse;
+        return mLoginCaseUse;
     }
 
-    public IsLoggeedUseCase getIsLoggeedUseCase() {
-        return isLoggeedUseCase;
+    public IsLoggedUseCase getIsLoggedUseCase() {
+        return mIsLoggedUseCase;
+    }
+
+    public GetUserUseCase getGetUserUseCase() {
+        return mGetUserUseCase;
     }
 }

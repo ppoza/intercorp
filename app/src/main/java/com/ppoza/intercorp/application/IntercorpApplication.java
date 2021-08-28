@@ -5,7 +5,8 @@ import androidx.multidex.MultiDexApplication;
 import com.google.firebase.auth.FirebaseAuth;
 import com.ppoza.intercorp.data.datasource.UserFirebaseDataSource;
 import com.ppoza.intercorp.data.repository.UserRepository;
-import com.ppoza.intercorp.interactors.IsLoggeedUseCase;
+import com.ppoza.intercorp.interactors.GetUserUseCase;
+import com.ppoza.intercorp.interactors.IsLoggedUseCase;
 import com.ppoza.intercorp.interactors.Interactors;
 import com.ppoza.intercorp.interactors.LoginUseCase;
 import com.ppoza.intercorp.interactors.LogoutUseCase;
@@ -16,17 +17,21 @@ public class IntercorpApplication extends MultiDexApplication {
     @Override
     public void onCreate() {
         super.onCreate();
+        resolveDependeencies();
+    }
 
+    private void resolveDependeencies() {
         FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
         UserFirebaseDataSource userFirebaseDataSource = new UserFirebaseDataSource(firebaseAuth);
+        UserRepository userRepository = new UserRepository(userFirebaseDataSource);
 
         Interactors interactors = new Interactors(
                 new LoginUseCase(firebaseAuth),
                 new LogoutUseCase(firebaseAuth),
-                new IsLoggeedUseCase(new UserRepository(userFirebaseDataSource))
+                new IsLoggedUseCase(userRepository),
+                new GetUserUseCase(userRepository)
         );
 
         IntercorpViewModelFactory.getInstance().inject(interactors);
-
     }
 }

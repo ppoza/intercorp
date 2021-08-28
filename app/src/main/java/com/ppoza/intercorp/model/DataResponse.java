@@ -1,5 +1,7 @@
 package com.ppoza.intercorp.model;
 
+import com.ppoza.intercorp.R;
+
 public class DataResponse<T> {
 
     ResponseType responseType;
@@ -10,12 +12,16 @@ public class DataResponse<T> {
         return new DataResponse(ResponseType.SUCCESS, data, message);
     }
 
-    public static <T> DataResponse error(T data, int message) {
-        return new DataResponse(ResponseType.ERROR, data, message);
+    public static <T> DataResponse success(T data) {
+        return new DataResponse(ResponseType.SUCCESS, data, R.string.success);
     }
 
-    public static <T> DataResponse loading(T data, int message) {
-        return new DataResponse(ResponseType.LOADING, data, message);
+    public static <T> DataResponse error(int message) {
+        return new DataResponse(ResponseType.ERROR, message);
+    }
+
+    public static <T> DataResponse loading() {
+        return new DataResponse(ResponseType.LOADING, null, R.string.loading);
     }
 
     private DataResponse(ResponseType responseType, T data, int message) {

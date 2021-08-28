@@ -39,6 +39,7 @@ public class ProfileFragment extends Fragment {
 
         checkLogged();
         listenData();
+        requestData();
 
         mBinding.logoutButtoon.setOnClickListener( button -> {
                 mProfileViewModel.logout();
@@ -55,8 +56,14 @@ public class ProfileFragment extends Fragment {
     }
 
     private void listenData() {
-
+        mProfileViewModel.userLiveData.observe(getViewLifecycleOwner(),  dataResponse -> {
+            
+        });
     }
 
+
+    private void requestData() {
+        mProfileViewModel.requestUser();
+    }
 
 }

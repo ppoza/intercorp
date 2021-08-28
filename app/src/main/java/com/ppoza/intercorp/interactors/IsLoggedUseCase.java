@@ -3,11 +3,11 @@ package com.ppoza.intercorp.interactors;
 import com.ppoza.intercorp.data.repository.UserRepository;
 
 
-public class IsLoggeedUseCase {
+public class IsLoggedUseCase {
 
     private UserRepository userRepository;
 
-    public IsLoggeedUseCase(UserRepository userRepository) {
+    public IsLoggedUseCase(UserRepository userRepository) {
         this.userRepository = userRepository;
     }
 
