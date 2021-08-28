@@ -9,9 +9,10 @@ import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
 import com.facebook.login.LoginResult;
 import com.ppoza.intercorp.R;
-import com.ppoza.intercorp.interactors.LoginCaseUse;
+import com.ppoza.intercorp.interactors.Interactors;
+import com.ppoza.intercorp.interactors.LoginUseCase;
 import com.ppoza.intercorp.model.DataResponse;
-import com.ppoza.intercorp.utils.CallbackDataResponse;
+import com.ppoza.intercorp.utils.DataResponseCallback;
 
 import java.util.List;
 
@@ -24,7 +25,7 @@ public class LoginViewModel extends ViewModel {
         public void onSuccess(LoginResult loginResult) {
 
             mLoginResultLiveData.postValue(DataResponse.loading(null, R.string.loading));
-            loginCaseUse.execute(loginResult.getAccessToken(), new CallbackDataResponse() {
+            mInteractors.getLoginCaseUse().execute(loginResult.getAccessToken(), new DataResponseCallback() {
                 @Override
                 public void onSuccess() {
                     mLoginResultLiveData.postValue(DataResponse.success(null, R.string.success));
@@ -52,9 +53,9 @@ public class LoginViewModel extends ViewModel {
     public final LiveData<DataResponse> loginResultLiveData = mLoginResultLiveData;
 
 
-    private LoginCaseUse loginCaseUse;
+    private Interactors mInteractors;
 
-    public LoginViewModel(LoginCaseUse loginCaseUse) {
-        this.loginCaseUse = loginCaseUse;
+    public LoginViewModel(Interactors interactors) {
+        this.mInteractors = interactors;
     }
 }

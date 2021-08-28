@@ -32,9 +32,9 @@ public class IntercorpViewModelFactory implements ViewModelProvider.Factory {
     @Override
     public <T extends ViewModel> T create(@NonNull Class<T> modelClass) {
         if(modelClass == ProfileViewModel.class) {
-            return (T) new ProfileViewModel(interactors.getLogoutUseCase());
+            return (T) new ProfileViewModel(interactors);
         } else if(modelClass == LoginViewModel.class) {
-            return (T) new LoginViewModel(interactors.getLoginCaseUse());
+            return (T) new LoginViewModel(interactors);
         }
         return null;
     }

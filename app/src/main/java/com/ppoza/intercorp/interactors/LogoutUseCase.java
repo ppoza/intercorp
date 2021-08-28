@@ -4,14 +4,14 @@ import com.google.firebase.auth.FirebaseAuth;
 
 public class LogoutUseCase {
 
-    private FirebaseAuth firebaseAuth;
+    private FirebaseAuth mFirebaseAuth;
 
     public LogoutUseCase(FirebaseAuth firebaseAuth) {
-        this.firebaseAuth = firebaseAuth;
+        this.mFirebaseAuth = firebaseAuth;
     }
 
     public void execute() {
-        firebaseAuth.signOut();
+        mFirebaseAuth.signOut();
     }
 
 }

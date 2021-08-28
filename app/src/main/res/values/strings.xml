@@ -16,6 +16,7 @@
     <string name="error_login">Error login</string>
     <string name="profile_label">User profile</string>
     <string name="loading">Ingresando...</string>
+    <string name="logout">Cerrar Sesión</string>
 
 
 </resources>

@@ -3,22 +3,28 @@ package com.ppoza.intercorp.interactors;
 public class Interactors {
 
     private LogoutUseCase logoutUseCase;
-    private LoginCaseUse loginCaseUse;
+    private LoginUseCase loginCaseUse;
+    private IsLoggeedUseCase isLoggeedUseCase;
 
     public Interactors(
-            LoginCaseUse loginCaseUse,
-            LogoutUseCase logoutUseCase
+            LoginUseCase loginCaseUse,
+            LogoutUseCase logoutUseCase,
+            IsLoggeedUseCase isLoggeedUseCase
     ) {
         this.logoutUseCase = logoutUseCase;
         this.loginCaseUse = loginCaseUse;
+        this.isLoggeedUseCase = isLoggeedUseCase;
     }
 
     public LogoutUseCase getLogoutUseCase() {
         return logoutUseCase;
     }
 
-    public LoginCaseUse getLoginCaseUse() {
+    public LoginUseCase getLoginCaseUse() {
         return loginCaseUse;
     }
 
+    public IsLoggeedUseCase getIsLoggeedUseCase() {
+        return isLoggeedUseCase;
+    }
 }

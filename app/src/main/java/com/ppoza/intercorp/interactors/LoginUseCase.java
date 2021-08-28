@@ -4,19 +4,19 @@ import com.facebook.AccessToken;
 import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.FacebookAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
-import com.ppoza.intercorp.utils.CallbackDataResponse;
+import com.ppoza.intercorp.utils.DataResponseCallback;
 
-public class LoginCaseUse {
+public class LoginUseCase {
 
-    private FirebaseAuth firebaseAuth;
+    private FirebaseAuth mFirebaseAuth;
 
-    public LoginCaseUse(FirebaseAuth firebaseAuth) {
-        this.firebaseAuth = firebaseAuth;
+    public LoginUseCase(FirebaseAuth firebaseAuth) {
+        this.mFirebaseAuth = firebaseAuth;
     }
 
-    public void execute(AccessToken token, CallbackDataResponse callback) {
+    public void execute(AccessToken token, DataResponseCallback callback) {
         AuthCredential credential = FacebookAuthProvider.getCredential(token.getToken());
-        firebaseAuth.signInWithCredential(credential)
+        mFirebaseAuth.signInWithCredential(credential)
                 .addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
                         callback.onSuccess();
