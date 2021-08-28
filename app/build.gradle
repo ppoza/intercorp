@@ -18,9 +18,18 @@ android {
     }
 
     buildTypes {
+        debug {
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            resValue "string", "facebook_app_id", "1474280152948463"
+            resValue "string", "fb_login_protocol_scheme", "fb1474280152948463"
+        }
+
+
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            resValue "string", "facebook_app_id", "1474280152948463"
+            resValue "string", "fb_login_protocol_scheme", "fb1474280152948463"
         }
     }
     compileOptions {
@@ -49,7 +58,7 @@ dependencies {
     implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.3.1'
     implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.3.1'
     implementation 'com.facebook.android:facebook-login:11.2.0'
-    testImplementation 'junit:junit:4.+'
+    testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.3'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
 }
