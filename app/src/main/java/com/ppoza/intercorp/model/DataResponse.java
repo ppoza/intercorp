@@ -17,7 +17,11 @@ public class DataResponse<T> {
     }
 
     public static <T> DataResponse error(int message) {
-        return new DataResponse(ResponseType.ERROR, message);
+        return new DataResponse(ResponseType.ERROR, null, message);
+    }
+
+    public static <T> DataResponse error() {
+        return new DataResponse(ResponseType.ERROR, null, R.string.error);
     }
 
     public static <T> DataResponse loading() {

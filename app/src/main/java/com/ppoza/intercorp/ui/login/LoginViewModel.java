@@ -44,19 +44,19 @@ public class LoginViewModel extends ViewModel {
 
                 @Override
                 public void onError() {
-                    mLoginResultLiveData.postValue(DataResponse.error(null, R.string.login_cancel_by_user));
+                    mLoginResultLiveData.postValue(DataResponse.error(R.string.login_cancel_by_user));
                 }
             });
         }
 
         @Override
         public void onCancel() {
-            mLoginResultLiveData.postValue(DataResponse.error(null, R.string.login_cancel_by_user));
+            mLoginResultLiveData.postValue(DataResponse.error(R.string.login_cancel_by_user));
         }
 
         @Override
         public void onError(FacebookException error) {
-            mLoginResultLiveData.postValue(DataResponse.error(null, R.string.error_login));
+            mLoginResultLiveData.postValue(DataResponse.error(R.string.error_login));
         }
     }
 }

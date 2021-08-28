@@ -57,7 +57,7 @@ public class ProfileFragment extends Fragment {
 
     private void listenData() {
         mProfileViewModel.userLiveData.observe(getViewLifecycleOwner(),  dataResponse -> {
-            
+
         });
     }
 
