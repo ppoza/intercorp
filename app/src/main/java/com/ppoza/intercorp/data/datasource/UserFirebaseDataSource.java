@@ -24,6 +24,10 @@ public class UserFirebaseDataSource implements UserDataSource {
     @Override
     public void getUser(DataResponseCallback<User> callback) {
         FirebaseUser firebaseUser =  mFirebaseAuth.getCurrentUser();
+        if(firebaseUser == null) {
+            callback.onSuccess(null);
+            return;
+        }
         this.mUsersReferences.child(firebaseUser.getUid()).get().addOnCompleteListener(task -> {
             if (task.isSuccessful()) {
                 User user = task.getResult().getValue(User.class);
