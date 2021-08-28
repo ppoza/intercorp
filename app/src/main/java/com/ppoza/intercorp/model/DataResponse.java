@@ -4,9 +4,9 @@ import com.ppoza.intercorp.R;
 
 public class DataResponse<T> {
 
-    ResponseType responseType;
-    int message;
-    T data;
+    final ResponseType responseType;
+    final int message;
+    final T data;
 
     public static <T> DataResponse success(T data, int message) {
         return new DataResponse(ResponseType.SUCCESS, data, message);
@@ -26,10 +26,6 @@ public class DataResponse<T> {
 
     public static <T> DataResponse error(int message) {
         return new DataResponse(ResponseType.ERROR, null, message);
-    }
-
-    public static <T> DataResponse error() {
-        return new DataResponse(ResponseType.ERROR, null, R.string.error);
     }
 
     public static <T> DataResponse loading() {

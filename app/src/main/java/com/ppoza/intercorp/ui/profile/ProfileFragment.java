@@ -58,9 +58,7 @@ public class ProfileFragment extends BaseFragment {
     }
 
     private void setUI() {
-        mBinding.logoutButton.setOnClickListener( button -> {
-                mProfileViewModel.createUser();
-            }
+        mBinding.logoutButton.setOnClickListener( button -> mProfileViewModel.createUser()
         );
 
         final Calendar calendar = Calendar.getInstance();

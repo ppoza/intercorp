@@ -50,11 +50,9 @@ public class LoginFragment extends BaseFragment {
     }
 
     private void listenData() {
-        mMainViewModel.activityResultLiveData.observe(getViewLifecycleOwner(), activityResult -> {
-            mLoginViewModel.callbackManager.onActivityResult(activityResult.getRequestCode(),
-                                                             activityResult.getResultCode(),
-                                                             activityResult.getData());
-        });
+        mMainViewModel.activityResultLiveData.observe(getViewLifecycleOwner(), activityResult -> mLoginViewModel.callbackManager.onActivityResult(activityResult.getRequestCode(),
+                                                         activityResult.getResultCode(),
+                                                         activityResult.getData()));
 
         mLoginViewModel.loginResultLiveData.observe(getViewLifecycleOwner(), loginResult -> {
             mBinding.setIsLoading(loginResult.isLoading());
@@ -68,7 +66,7 @@ public class LoginFragment extends BaseFragment {
                     break;
                 }
                 case ERROR: {
-                    Toast.makeText(requireActivity(), loginResult.getMessage(), Toast.LENGTH_LONG);
+                    Toast.makeText(requireActivity(), loginResult.getMessage(), Toast.LENGTH_LONG).show();
                     break;
                 }
             }

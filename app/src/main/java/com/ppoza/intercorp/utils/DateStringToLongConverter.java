@@ -11,12 +11,12 @@ import java.util.Locale;
 
 public class DateStringToLongConverter {
 
-    static SimpleDateFormat simpleDateFormat = new SimpleDateFormat(Constants.DATE_FORMAT, Locale.getDefault());
+    static final SimpleDateFormat simpleDateFormat = new SimpleDateFormat(Constants.DATE_FORMAT, Locale.getDefault());
 
     public static long convertDateStringToLong(String text) {
         try {
             return simpleDateFormat.parse(text).getTime();
-        } catch (ParseException e) {
+        } catch (Exception e) {
             return 0;
         }
     }
@@ -28,7 +28,6 @@ public class DateStringToLongConverter {
         }
 
         Date date = new Date(value);
-        String dateText = simpleDateFormat.format(date);
-        return dateText;
+        return simpleDateFormat.format(date);
     }
 }

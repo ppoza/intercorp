@@ -31,11 +31,7 @@ public class UserFirebaseDataSource implements UserDataSource {
         this.mUsersReferences.child(firebaseUser.getUid()).get().addOnCompleteListener(task -> {
             if (task.isSuccessful()) {
                 User user = task.getResult().getValue(User.class);
-                if(user == null) {
-                    callback.onSuccess(null);
-                } else {
-                    callback.onSuccess(user);
-                }
+                callback.onSuccess(user);
             }  else {
                 callback.onSuccess(null);
             }

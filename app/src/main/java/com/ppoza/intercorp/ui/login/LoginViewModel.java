@@ -10,16 +10,18 @@ import com.facebook.FacebookException;
 import com.facebook.login.LoginResult;
 import com.google.firebase.auth.AuthResult;
 import com.ppoza.intercorp.R;
+import com.ppoza.intercorp.config.Constants;
 import com.ppoza.intercorp.interactors.Interactors;
 import com.ppoza.intercorp.model.DataResponse;
 import com.ppoza.intercorp.utils.DataResponseCallback;
 
+import java.util.Arrays;
 import java.util.List;
 
 public class LoginViewModel extends ViewModel {
 
     public final CallbackManager callbackManager = CallbackManager.Factory.create();
-    public final List<String> permissions = List.of("email", "public_profile");
+    public final List<String> permissions = Arrays.asList(Constants.EMAIL_PERMISSION, Constants.PUBLIC_PROFILE_PERMISSION);
     public FacebookCallback<LoginResult> facebookCallback = new FacebookCallbackImpl();
 
     private final MutableLiveData<DataResponse> mLoginResultLiveData = new MutableLiveData();

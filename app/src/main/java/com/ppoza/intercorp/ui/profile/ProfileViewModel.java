@@ -14,13 +14,13 @@ public class ProfileViewModel extends ViewModel {
 
     private final Interactors mInteractors;
 
-    private MutableLiveData<DataResponse<User>> mUserLiveData = new MutableLiveData();
+    private final MutableLiveData<DataResponse<User>> mUserLiveData = new MutableLiveData();
     public final LiveData<DataResponse<User>> userLiveData = mUserLiveData;
 
-    private MutableLiveData<DataResponse> mCreateUserResponseLiveData = new MutableLiveData();
+    private final MutableLiveData<DataResponse> mCreateUserResponseLiveData = new MutableLiveData();
     public final LiveData<DataResponse> createUserResponseLiveData = mCreateUserResponseLiveData;
 
-    private MutableLiveData<DataResponse> mLogoutResponseLiveData = new MutableLiveData();
+    private final MutableLiveData<DataResponse> mLogoutResponseLiveData = new MutableLiveData();
     public final LiveData<DataResponse> logoutResponseLiveData = mLogoutResponseLiveData;
 
     public User user = new User();
