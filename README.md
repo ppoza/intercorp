@@ -31,6 +31,12 @@ Se opto por una solución simple, donde la Application tiene tiene la responsabi
 En una aplicación mas compleja hubiese usado Hilt o Dagger para solucionar la Injeccion de Dependencias.
 
 # Google Play
-
   [Descargar app](https://play.google.com/store/apps/details?id=com.ppoza.intercorp)
+  
+  La app fue publicada y se encuentra actualmente en review.
+  ![Google Play](https://firebasestorage.googleapis.com/v0/b/encargo-dev.appspot.com/o/Screen%20Shot%202021-08-29%20at%2023.14.25.png?alt=media&token=32d38a51-c7b4-4284-a046-8fea8457a209)
+
+# Alternativa de descarga
+  [Descargar app](https://i.diawi.com/dqnB2M)
+
   
