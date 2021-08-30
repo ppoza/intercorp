@@ -2,7 +2,7 @@
 
 La aplicación permite iniciar sesión con Facebook, para despues completar tus datos personales y terminar la creación de tu cuenta. Si el usuario que se loguea y tiene creada una cuenta le muestra sus datos.
 
-# Sobre el desarrollo de la aplicación.
+# Sobre el desarrollo de la aplicación
 
 * **Lenguaje:** 
   - Java
@@ -25,7 +25,7 @@ Al patrón MVVW se le sumo el seguimiento de las reglas de Clean Architecture, a
   - Los view model solo se encargan de escuchar las interaciones del usuario para disparar los distintos casos de usos sin saber acerca de su implementación.
   - El acesso a la información se soluciono agregando un repositorio que usa una DataSource abstracto, que nos permite cambiar de forma facil su implementación u origen del los datos sin que las demás capas se enteren de dicho cambio.
 
-# Resolución de dependecias
+# Resolución de dependencias
 
 Se opto por una solución simple, donde la Application tiene tiene la responsabilidad de construir todo objectos complejos, sabiendo de sus dependecias y como resolverlas. Una vez construidos los objectos complejos se los inyecta a un View Model Factory que tiene la responsabilidad de construir los distintos view models.
 En una aplicación mas compleja hubiese usado Hilt o Dagger para solucionar la Injeccion de Dependencias.
